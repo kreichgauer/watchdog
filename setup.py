@@ -19,9 +19,9 @@ import sys
 import imp
 import os.path
 
-from setuptools import setup, find_packages
-from setuptools.extension import Extension
-from setuptools.command.build_ext import build_ext
+from distutils.core import setup
+from distutils.extension import Extension
+from distutils.command.build_ext import build_ext
 from distutils.util import get_platform
 
 SRC_DIR = 'src'
@@ -155,7 +155,12 @@ setup(name="watchdog",
           'Topic :: Utilities',
           ],
       package_dir={'': SRC_DIR},
-      packages=find_packages(SRC_DIR),
+      packages=[
+          'watchdog',
+          'watchdog.observers',
+          'watchdog.tricks',
+          'watchdog.utils',
+      ],
       include_package_data=True,
       install_requires=install_requires,
       entry_points={
